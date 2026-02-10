@@ -34,3 +34,5 @@ build/
 # Credentials / environment
 /src/main/resources/application.properties
 /src/main/resources/application.yml
+git push origin master
+src/main/java/com/carrental/config/MongoConfig.java
