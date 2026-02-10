@@ -1,0 +1,33 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-5 fw-bold text-primary">Nos Véhicules Disponibles</h2>
+
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let car of cars">
+      
+      <div class="card h-100 shadow-sm border-0 car-card">
+        <img [src]="car.image" class="card-img-top" alt="{{ car.brand }} {{ car.model }}" style="height: 200px; object-fit: cover;">
+        
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="card-title fw-bold mb-0">{{ car.brand }} {{ car.model }}</h5>
+            <span class="badge bg-success" *ngIf="car.available">Disponible</span>
+            <span class="badge bg-danger" *ngIf="!car.available">Louée</span>
+          </div>
+
+          <p class="card-text text-muted">
+            Une voiture confortable et élégante pour tous vos trajets.
+          </p>
+
+          <h4 class="text-primary fw-bold">{{ car.price }} € <span class="fs-6 text-muted">/ jour</span></h4>
+        </div>
+
+        <div class="card-footer bg-white border-0 pb-3">
+          <button class="btn btn-outline-primary w-100" [disabled]="!car.available">
+            {{ car.available ? 'Réserver maintenant' : 'Indisponible' }}
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

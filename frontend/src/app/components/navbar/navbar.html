@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" routerLink="/">
+      <i class="bi bi-car-front-fill me-2"></i>CarRental
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/cars" routerLinkActive="active">Nos Voitures</a>
+        </li>
+      </ul>
+
+      <div class="d-flex gap-2">
+        <a routerLink="/login" class="btn btn-outline-light btn-sm">
+          <i class="bi bi-box-arrow-in-right me-1"></i>Connexion
+        </a>
+        <a routerLink="/register" class="btn btn-primary btn-sm">
+          Inscription
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
