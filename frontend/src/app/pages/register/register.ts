@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common'; // Pour les *ngIf
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms'; // Pour le formulaire
 import { Router, RouterLink } from '@angular/router'; // Pour la navigation
 import { AuthService } from '../../services/auth';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, HttpClientModule], // <--- On importe les modules ici
+  imports: [CommonModule, ReactiveFormsModule, RouterLink], // <--- HttpClientModule supprimé (config globale)
   templateUrl: './register.html',
   styleUrl: './register.css'
 })

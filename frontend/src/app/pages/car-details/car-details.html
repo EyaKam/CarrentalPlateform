@@ -1,0 +1,54 @@
+<div class="container mt-5">
+  <!-- Indicateur de chargement -->
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Chargement...</span>
+    </div>
+  </div>
+
+  <!-- Message d'erreur -->
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <!-- Détails de la voiture -->
+  <div *ngIf="!loading && car" class="row mt-4">
+    <div class="col-md-6">
+      <img [src]="car.image" class="img-fluid rounded" alt="{{ car.brand }} {{ car.model }}" style="height: 400px; object-fit: cover;">
+    </div>
+
+    <div class="col-md-6">
+      <h2 class="fw-bold text-primary mb-3">{{ car.brand }} {{ car.model }}</h2>
+
+      <div class="card mb-4 border-0 bg-light">
+        <div class="card-body">
+          <p class="card-text mb-0 text-primary fs-5 fw-bold">
+            {{ car.pricePerDay }} €
+            <span class="fs-6 text-muted">/jour</span>
+          </p>
+        </div>
+      </div>
+
+      <h5 class="fw-bold mb-3">Caractéristiques</h5>
+      <ul class="list-unstyled">
+        <li class="mb-2"><strong>Année:</strong> {{ car.year || '-' }}</li>
+        <li class="mb-2"><strong>Transmission:</strong> {{ car.transmission || '-' }}</li>
+        <li class="mb-2"><strong>Carburant:</strong> {{ car.fuelType || '-' }}</li>
+        <li class="mb-2"><strong>Places:</strong> {{ car.seats || '-' }}</li>
+        <li class="mb-2"><strong>Localisation:</strong> {{ car.location || '-' }}</li>
+      </ul>
+
+      <h5 class="fw-bold mt-4 mb-3">Description</h5>
+      <p class="text-muted">{{ car.description || 'Aucune description disponible' }}</p>
+
+      <div class="d-grid gap-2 mt-5">
+        <button class="btn btn-primary btn-lg" (click)="bookCar()" [disabled]="car.available === false">
+          {{ car.available !== false ? 'Réserver cette voiture' : 'Indisponible' }}
+        </button>
+        <button class="btn btn-outline-secondary" (click)="goBack()">
+          Retour à la liste
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

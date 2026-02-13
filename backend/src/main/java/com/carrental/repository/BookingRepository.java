@@ -11,4 +11,7 @@ public interface BookingRepository extends MongoRepository<Booking, String> {
     // Trouve toutes les réservations faites par cet utilisateur
     List<Booking> findByUserId(String userId);
     
+    // Trouve toutes les réservations pour une voiture
+    List<Booking> findByCarId(String carId);
+    
 }

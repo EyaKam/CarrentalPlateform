@@ -1,7 +1,20 @@
 <div class="container mt-5">
   <h2 class="text-center mb-5 fw-bold text-primary">Nos Véhicules Disponibles</h2>
 
-  <div class="row">
+  <!-- Indicateur de chargement -->
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Chargement...</span>
+    </div>
+  </div>
+
+  <!-- Message d'erreur -->
+  <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{ error }}
+  </div>
+
+  <!-- Liste des voitures -->
+  <div class="row" *ngIf="!loading && cars.length > 0">
     <div class="col-md-4 mb-4" *ngFor="let car of cars">
       
       <div class="card h-100 shadow-sm border-0 car-card">
@@ -10,24 +23,42 @@
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-center mb-2">
             <h5 class="card-title fw-bold mb-0">{{ car.brand }} {{ car.model }}</h5>
-            <span class="badge bg-success" *ngIf="car.available">Disponible</span>
-            <span class="badge bg-danger" *ngIf="!car.available">Louée</span>
+            <span class="badge bg-success" *ngIf="car.available !== false">Disponible</span>
+            <span class="badge bg-danger" *ngIf="car.available === false">Louée</span>
           </div>
 
           <p class="card-text text-muted">
-            Une voiture confortable et élégante pour tous vos trajets.
+            {{ car.description || 'Une voiture confortable et élégante pour tous vos trajets.' }}
           </p>
 
-          <h4 class="text-primary fw-bold">{{ car.price }} € <span class="fs-6 text-muted">/ jour</span></h4>
+          <div class="mb-3">
+            <p class="mb-1"><strong>Année:</strong> {{ car.year || '-' }}</p>
+            <p class="mb-1"><strong>Transmission:</strong> {{ car.transmission || '-' }}</p>
+            <p class="mb-1"><strong>Carburant:</strong> {{ car.fuelType || '-' }}</p>
+            <p class="mb-1"><strong>Places:</strong> {{ car.seats || '-' }}</p>
+            <p class="mb-0"><strong>Localisation:</strong> {{ car.location || '-' }}</p>
+          </div>
+
+          <h4 class="text-primary fw-bold">{{ car.pricePerDay }} € <span class="fs-6 text-muted">/ jour</span></h4>
         </div>
 
         <div class="card-footer bg-white border-0 pb-3">
-          <button class="btn btn-outline-primary w-100" [disabled]="!car.available">
-            {{ car.available ? 'Réserver maintenant' : 'Indisponible' }}
-          </button>
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary" [disabled]="car.available === false" (click)="bookCar(car.id)">
+              {{ car.available !== false ? 'Réserver maintenant' : 'Indisponible' }}
+            </button>
+            <button class="btn btn-outline-secondary btn-sm" (click)="viewCarDetails(car.id)">
+              Voir les détails
+            </button>
+          </div>
         </div>
       </div>
 
     </div>
+  </div>
+
+  <!-- Aucune voiture disponible -->
+  <div *ngIf="!loading && cars.length === 0" class="alert alert-info">
+    <p class="mb-0">Aucune voiture disponible pour le moment.</p>
   </div>
 </div>

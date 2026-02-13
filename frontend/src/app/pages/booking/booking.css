@@ -1,0 +1,22 @@
+.container {
+  max-width: 1200px;
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sticky-top {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.text-sm {
+  font-size: 0.9rem;
+}
+
+.btn-primary:disabled,
+.btn-outline-secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
