@@ -1,26 +1,3 @@
-<<<<<<< HEAD
-﻿# Backend
-backend/target/
-backend/.mvn/
-backend/.idea/
-backend/.vscode/
-backend/src/main/resources/application.properties
-backend/src/main/resources/application.yml
-backend/src/main/java/com/carrental/config/MongoConfig.java
-backend/*.iml
-
-# Frontend
-frontend/node_modules/
-frontend/dist/
-frontend/.angular/
-
-# IDE
-.idea/
-.vscode/
-*.iws
-*.iml
-*.ipr
-=======
 HELP.md
 target/
 .mvn/wrapper/maven-wrapper.jar
@@ -58,5 +35,4 @@ build/
 /src/main/resources/application.properties
 /src/main/resources/application.yml
 git push origin master
-src/main/java/com/carrental/config/MongoConfig.java
->>>>>>> 102b6ba22cc925913210f5ffe856be8837e2c630
+src/main/java/com/carrental/config/MongoConfig.java 

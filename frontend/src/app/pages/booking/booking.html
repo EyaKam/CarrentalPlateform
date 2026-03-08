@@ -1,0 +1,112 @@
+<div class="container mt-5">
+  <!-- Indicateur de chargement -->
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Chargement...</span>
+    </div>
+  </div>
+
+  <!-- Contenu principal -->
+  <div *ngIf="!loading" class="row">
+    <!-- Récapitulatif de la voiture -->
+    <div class="col-md-4" *ngIf="car">
+      <div class="card sticky-top" style="top: 20px;">
+        <img [src]="car.image" class="card-img-top" alt="{{ car.brand }} {{ car.model }}" style="height: 200px; object-fit: cover;">
+        
+        <div class="card-body">
+          <h5 class="card-title fw-bold">{{ car.brand }} {{ car.model }}</h5>
+          <p class="card-text text-muted text-sm">{{ car.description || 'Aucune description' }}</p>
+
+          <hr>
+
+          <p class="mb-2">
+            <strong>Prix par jour:</strong>
+            <span class="text-primary fw-bold">{{ car.pricePerDay }} €</span>
+          </p>
+
+          <div class="bg-light p-3 rounded mt-3">
+            <p class="mb-2"><small><strong>Récapitulatif:</strong></small></p>
+            <p class="mb-0">
+              <strong>Total:</strong>
+              <span class="text-primary fw-bold">{{ calculateTotalPrice() }} €</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulaire de réservation -->
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title fw-bold mb-4">Effectuer une réservation</h4>
+
+          <!-- Message d'erreur -->
+          <div *ngIf="error" class="alert alert-danger alert-dismissible fade show">
+            {{ error }}
+          </div>
+
+          <!-- Message de succès -->
+          <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show">
+            {{ successMessage }}
+          </div>
+
+          <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="startDate" class="form-label">Date de début</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="startDate"
+                  formControlName="startDate"
+                  [min]="'2024-01-01'"
+                  required>
+                <small class="form-text text-muted">Sélectionnez la date de début</small>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="endDate" class="form-label">Date de fin</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="endDate"
+                  formControlName="endDate"
+                  [min]="bookingForm.get('startDate')?.value || '2024-01-01'"
+                  required>
+                <small class="form-text text-muted">Sélectionnez la date de fin</small>
+              </div>
+            </div>
+
+            <div class="alert alert-info mt-3">
+              <p class="mb-0">
+                <strong>Durée:</strong>
+                {{ getDaysBetween() > 0 ? getDaysBetween() + ' jour(s)' : 'À calculer' }}
+              </p>
+              <p class="mb-0">
+                <strong>Prix total:</strong>
+                <span class="text-primary fw-bold">{{ calculateTotalPrice() }} €</span>
+              </p>
+            </div>
+
+            <div class="d-grid gap-2 mt-4">
+              <button
+                type="submit"
+                class="btn btn-primary btn-lg"
+                [disabled]="!bookingForm.valid || submitting">
+                {{ submitting ? 'Réservation en cours...' : 'Confirmer la réservation' }}
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="goBack()"
+                [disabled]="submitting">
+                Annuler
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

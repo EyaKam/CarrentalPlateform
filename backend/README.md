@@ -1,9 +1,8 @@
-# Car Rental Platform
+# Car Rental Backend
 
-A full-stack web application for car rental management. Built with Spring Boot backend and Angular frontend.
+A Spring Boot backend application for a car rental system with MongoDB database.
 
 ## Tech Stack
-
 
 - **Java 17+** - Programming language
 - **Spring Boot 3.x** - Web framework
